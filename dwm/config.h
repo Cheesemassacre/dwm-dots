@@ -9,14 +9,14 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "SourceCodePro:pixelsize=14:antialias=true:autohint=true:style=SemiBold" };
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#0f1419"; /* podloga bara */
-static const char col_gray2[]       = "#1c1c1c"; /* neaktivni prozor */
-static const char col_gray3[]       = "#e6e1cf"; /* neaktivni tag */
-static const char col_gray4[]       = "#b8cc52"; /* naslov i aktivni tag tekst */
-static const char col_cyan[]        = "#0f1419"; /* aktivni naslov i tag */
-static const char col_tag[]         = "#f07178";
-static const char col_border[]      = "#d2a6ff";
-static const unsigned int baralpha = 0xE6;
+static const char col_gray1[]       = "#000000"; /* podloga bara */
+static const char col_gray2[]       = "#111111"; /* neaktivni prozor */
+static const char col_gray3[]       = "#bfbdb6"; /* neaktivni tag */
+static const char col_gray4[]       = "#dedede"; /* naslov i aktivni tag tekst */
+static const char col_cyan[]        = "#000000"; /* aktivni naslov i tag */
+static const char col_tag[]         = "#96bddb";
+static const char col_border[]      = "#3e4b59";
+static const unsigned int baralpha = 0x65;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
@@ -53,13 +53,14 @@ static const Rule rules[] = {
 	{ "Qalculate-gtk",        NULL,       NULL,       0,            1,           0,          0,         -1 },
 	{ "Pavucontrol",          NULL,       NULL,       0,            1,           0,          0,         -1 },
 	{ "alacritty",            NULL,       NULL,       0,            0,           1,          0,         -1 },
-	{ "kitty",                NULL,       NULL,       0,            1,           1,          0,         -1 },
+	{ "kitty",                NULL,       NULL,       0,            0,           1,          0,         -1 },
 	{ "ranger",               NULL,       NULL,       0,            1,           0,          0,         -1 },
 	{ NULL,                   NULL,   "Event Tester", 0,            0,           0,          1,         -1 }, /* xev */
+	{ "st-256color",          NULL,       NULL,       0,            1,           1,          0,         -1 },
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.52; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -70,6 +71,8 @@ static const Layout layouts[] = {
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 	{ "[D]",      deck },
+	{ "TTT",      bstack },
+	{ "===",      bstackhoriz },
 };
 
 /* key definitions */
@@ -87,6 +90,7 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = { "rofi", "-show", "drun", NULL}; 
 static const char *termcmd[]  = { "kitty", NULL };
 /* static const char *clipcmd[]  = { "rofi", "-modi", "clipboard:greenclip", "print", "-show", "clipboard", NULL }; */
+#include "movestack.c"
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } }, 
@@ -114,9 +118,12 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_k,      rotatestack,    {.i = -1 } },
 	{ MODKEY,			XK_c,      focusmaster,    {0} },
+	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[4]} },
+	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[5]} },
+        { MODKEY,                       XK_x,      movecenter,     {0} },
+        { MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
