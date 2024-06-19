@@ -1,0 +1,70 @@
+11:30:29 [info] [LOG SESSION] ---------- START ----------
+11:30:29 [info] [PluginFactory] loading plugins
+11:30:29 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libalsaout.so
+11:30:29 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libffmpegdecoder.so
+11:30:29 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libgmedecoder.so
+11:30:29 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libhttpdatastream.so
+11:30:29 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libmpris.so
+11:30:29 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libnullout.so
+11:30:29 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libopenmptdecoder.so
+11:30:29 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libpipewireout.so
+11:30:29 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libportaudioout.so
+11:30:29 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libpulseout.so
+11:30:29 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libserver.so
+11:30:29 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libsndioout.so
+11:30:29 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libstockencoders.so
+11:30:29 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libsupereqdsp.so
+11:30:29 [info] [PluginFactory] loaded: /usr/share/musikcube/plugins/libtaglibreader.so
+11:30:29 [info] [PortAudioOut] Pa_Initialize() return code: 0
+11:30:29 [info] [PipeWireOut] shutdown started
+11:30:29 [info] [PipeWireOut] shutdown complete
+11:30:29 [warning] [PortAudioOut] Pa_AbortStream() return code: -9988
+11:30:29 [warning] [PortAudioOut] Pa_CloseStream() return code: -9988
+11:30:29 [info] [PortAudioOut] Pa_Terminate() return code: 0
+11:30:29 [info] [Indexer] indexer source -1303229654 running...
+11:30:29 [info] [Indexer] indexer source -1303229654 finished
+11:30:29 [info] [Indexer] indexer source 155697690 running...
+11:30:29 [info] [Indexer] indexer source 155697690 finished
+11:30:29 [info] [Indexer] scanning /home/marin/Music/
+11:30:29 [info] [Indexer] scan completed successfully
+11:30:29 [info] [Indexer] cleanup 1/2
+11:30:29 [info] [Indexer] cleanup 2/2
+11:30:29 [info] [Indexer] optimizing
+11:30:29 [info] [Indexer] done!
+11:30:29 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+11:30:29 [info] [LocalLibrary] query 'CategoryListQuery' running
+11:30:29 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+11:30:29 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' enqueued
+11:30:29 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' running
+11:30:29 [info] [LocalLibrary] query 'PersistedPlayQueueQuery' finished with status=4
+11:30:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
+11:30:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
+11:30:29 [info] [LocalLibrary] query 'CategoryListQuery' enqueued
+11:30:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
+11:30:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
+11:30:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
+11:30:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
+11:30:29 [info] [LocalLibrary] query 'CategoryListQuery' running
+11:30:29 [info] [LocalLibrary] query 'CategoryListQuery' finished with status=4
+11:30:29 [info] [LocalLibrary] query 'TrackMetadataQuery' enqueued
+11:30:29 [info] [LocalLibrary] query 'TrackMetadataQuery' running
+11:30:29 [info] [LocalLibrary] query 'TrackMetadataQuery' finished with status=4
+11:30:29 [info] [GaplessTransport] starting track at /home/marin/Music/Dua Lipa - Radical Optimism (2024) Mp3 320kbps [PMEDIA] ⭐️/04. These Walls.mp3
+11:30:29 [info] [Player] new instance created
+11:30:29 [info] [GaplessTransport] stop
+11:30:29 [info] [Stream] opening /home/marin/Music/Dua Lipa - Radical Optimism (2024) Mp3 320kbps [PMEDIA] ⭐️/04. These Walls.mp3
+11:30:29 [info] [LocalFileStream] opening file: /home/marin/Music/Dua Lipa - Radical Optimism (2024) Mp3 320kbps [PMEDIA] ⭐️/04. These Walls.mp3
+11:30:29 [info] [ffmpegdecoder] parsing data stream...
+11:30:29 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
+11:30:29 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
+11:30:29 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4
+11:30:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' enqueued
+11:30:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' running
+11:30:29 [info] [LocalLibrary] query 'CategoryTrackListQuery' finished with status=4
+11:30:29 [info] [ffmpegdecoder] found audio stream!
+11:30:29 [info] [ffmpegdecoder] resolved codec: MP3 (MPEG audio layer 3)
+11:30:29 [info] [Streams] found a decoder for /home/marin/Music/Dua Lipa - Radical Optimism (2024) Mp3 320kbps [PMEDIA] ⭐️/04. These Walls.mp3
+11:30:29 [warning] [ffmpegdecoder] invalid packet detected, discarding.
+11:30:29 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' enqueued
+11:30:29 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' running
+11:30:29 [info] [LocalLibrary] query 'TrackMetadataBatchQuery' finished with status=4

@@ -1,0 +1,68 @@
+super + e ; p ; r
+	./.picomreload2.sh
+
+super + shift + s
+	xfce4-screenshooter
+
+super + e ; t
+	kitty -e ranger
+	
+super + e ; s ; p
+	spotify
+
+super + e ; d ; i
+	Vesktop
+
+super + e ; w ; w ; w
+        brave --enable-features=VaapiVideoDecodeLinuxGL
+
+super + shift + p
+        rofi -modi "clipboard:greenclip print" -show clipboard
+
+super + v
+	kitty -e vim
+
+super + b
+	pavucontrol
+
+super + Escape
+	pkill -USR1 -x sxhkd
+
+super + shift + e
+    ./.poweopt.sh
+
+super + w
+        rofi -show window
+
+super + e; m
+        kitty -e musikcube
+
+super + n
+	kitty -e vim .notes
+
+XF86AudioRaiseVolume
+	pactl set-sink-volume @DEFAULT_SINK@ +2%
+
+XF86AudioLowerVolume
+	pactl set-sink-volume @DEFAULT_SINK@ -2%
+
+XF86AudioMute
+	pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+XF86MonBrightnessDown
+	brightnessctl s 10%-
+
+XF86MonBrightnessUp
+	brightnessctl s +10%
+
+XF86AudioPlay 
+       playerctl play-pause 
+
+XF86AudioPause 
+       playerctl play-pause 
+
+XF86AudioNext 
+       playerctl next 
+
+XF86AudioPrev 
+       playerctl previous
