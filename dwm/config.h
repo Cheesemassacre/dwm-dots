@@ -9,14 +9,14 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "SourceCodePro:pixelsize=14:antialias=true:autohint=true:style=SemiBold" };
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#000000"; /* podloga bara */
-static const char col_gray2[]       = "#111111"; /* neaktivni prozor */
-static const char col_gray3[]       = "#bfbdb6"; /* neaktivni tag */
-static const char col_gray4[]       = "#dedede"; /* naslov i aktivni tag tekst */
-static const char col_cyan[]        = "#000000"; /* aktivni naslov i tag */
-static const char col_tag[]         = "#96bddb";
-static const char col_border[]      = "#3e4b59";
-static const unsigned int baralpha = 0x65;
+static const char col_gray1[]       = "#00040a"; /* podloga bara */
+static const char col_gray2[]       = "#1f1d2e"; /* neaktivni prozor */
+static const char col_gray3[]       = "#dcd7ba"; /* neaktivni tag */
+static const char col_gray4[]       = "#dcd7ba"; /* naslov i aktivni tag tekst */
+static const char col_cyan[]        = "#00040a"; /* aktivni naslov i tag */
+static const char col_tag[]         = "#957fb8";
+static const char col_border[]      = "#dcd7ba";
+static const unsigned int baralpha = 0xe6;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
