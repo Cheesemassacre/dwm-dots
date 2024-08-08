@@ -65,14 +65,14 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
-	{ vol_perc, "^c#ffb97b^  %s%% ", "Master"	      }, 
-	{ cpu_perc, "^c#dedede^|^c#00988e^  %s%% ", NULL	      },
-	{ ram_perc, "^c#dedede^|^c#e17373^  %s%% ", NULL	      },
+	{ vol_perc, "^c#e6c384^  %s%% ", "Master"	      }, 
+	{ cpu_perc, "^c#e0def4^|^c#7fb4ca^  %s%% ", NULL	      },
+	{ ram_perc, "^c#e0def4^|^c#c34043^  %s%% ", NULL	      },
 	/* { vol_perc, "|   %s%% ", NULL	      }, */
 	/* { run_command, "| 󰀼 %s |", "~/.archupdatecounter.sh" }, */
 	/* { uptime, " [^c#d3d3d3^ %s]", 	     NULL}, */
-	{ wifi_perc, "^c#dedede^|^c#bddeab^ 󰖩 %s%% ", "wlan0" },
-	{ battery_perc, "^c#dedede^|^c#96bddb^ 󰁹 %s%% ", "BAT0" },
-	{ datetime, "^c#dedede^|^c#dedede^ %s ",           "%a %b %d %R" },
+	// { wifi_perc, "^c#e0def4^|^c#bddeab^ 󰖩 %s%% ", "wlan0" },
+	{ battery_perc, "^c#e0def4^|^c#938aa9^ 󰁹 %s%% ", "BAT0" },
+	{ datetime, "^c#e0def4^|^c#dcd7ba^ %s ",           "%a %b %d %R" },
 };
 
