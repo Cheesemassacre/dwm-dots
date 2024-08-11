@@ -1,0 +1,52 @@
+From 2eb73abfbc2a81ac5f6548ebc9b3db660d1be179 Mon Sep 17 00:00:00 2001
+From: Philip Thomas Kanianthara <philip.kanianthara@gmail.com>
+Date: Fri, 9 Feb 2024 14:18:00 +0800
+Subject: [PATCH] Applied movecenter patch manually, with compile check
+
+---
+ config.def.h | 1 +
+ dwm.c        | 9 +++++++++
+ 2 files changed, 10 insertions(+)
+
+diff --git a/config.def.h b/config.def.h
+index 061ad66..0b767a7 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -84,6 +84,7 @@ static const Key keys[] = {
+ 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+ 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+ 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
++	{ MODKEY,                       XK_x,      movecenter,     {0} },
+ 	TAGKEYS(                        XK_1,                      0)
+ 	TAGKEYS(                        XK_2,                      1)
+ 	TAGKEYS(                        XK_3,                      2)
+diff --git a/dwm.c b/dwm.c
+index e5efb6a..e6846a2 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -184,6 +184,7 @@ static void maprequest(XEvent *e);
+ static void monocle(Monitor *m);
+ static void motionnotify(XEvent *e);
+ static void movemouse(const Arg *arg);
++static void movecenter(const Arg *arg);
+ static Client *nexttiled(Client *c);
+ static void pop(Client *c);
+ static void propertynotify(XEvent *e);
+@@ -1193,6 +1194,14 @@ movemouse(const Arg *arg)
+ 	}
+ }
+ 
++void
++movecenter(const Arg *arg)
++{
++	selmon->sel->x = selmon->sel->mon->mx + (selmon->sel->mon->mw - WIDTH(selmon->sel)) / 2;
++	selmon->sel->y = selmon->sel->mon->my + (selmon->sel->mon->mh - HEIGHT(selmon->sel)) / 2;
++	arrange(selmon);
++}
++
+ Client *
+ nexttiled(Client *c)
+ {
+-- 
+2.34.1
+
