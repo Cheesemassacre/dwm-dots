@@ -3,6 +3,7 @@
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const Gap default_gap        = {.isgap = 1, .realgap = 10, .gappx = 10};
+static const int gapmon             = 10;        /* gap for monocle layout*/
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -11,7 +12,7 @@ static const int vertpad            = 10;       /* vertical padding of bar */
 static const int sidepad            = 10;       /* horizontal padding of bar */
 static const char *fonts[]          = { "IosevkaFixed:pixelsize=16:antialias=true:autohint=true:style=Regular", "Symbols Nerd Font:pixelsize=16:antialias=true:autohint=true" };
 static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#00040a";
+static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#000000";
 static const char col_gray3[]       = "#dcd7ba";
 static const char col_gray4[]       = "#c0caf5";
@@ -25,7 +26,7 @@ static const char *colors[][3]      = {
 
 /* tagging */
 #define MAX_TAGLEN 16
-static char tags[][MAX_TAGLEN] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static char tags[][MAX_TAGLEN] = { "term", "web", "fmg", "mus", "disc", "vim", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -74,7 +75,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "rofi", "-show", "drun", NULL}; 
+static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "10", NULL}; 
 static const char *termcmd[]  = { "kitty", NULL };
 
 #include "movestack.c"
