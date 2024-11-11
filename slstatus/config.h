@@ -1,13 +1,13 @@
 /* See LICENSE file for copyright and license details. */
 
 /* interval between updates (in ms) */
-const unsigned int interval = 2000;
+const unsigned int interval = 1000;
 
 /* text to show if no value can be retrieved */
 static const char unknown_str[] = "n/a";
 
-/* maximum output string length */
-#define MAXLEN 2048
+/* maximum command output length */
+#define CMDLEN 128
 
 /*
  * function            description                     argument (example)
@@ -65,14 +65,14 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
-	{ vol_perc, "^c#e6c384^  %s%% ", "Master"	      }, 
-	{ cpu_perc, "^c#e0def4^|^c#7fb4ca^  %s%% ", NULL	      },
-	{ ram_perc, "^c#e0def4^|^c#c34043^  %s%% ", NULL	      },
+	{ vol_perc, " %s%% ", "Master", 5, 2	      }, 
+	{ cpu_perc, "|  %s%% ", NULL, 2, -1,	      },
+	{ ram_perc, "|  %s%% ", NULL, 5, -1,	      },
 	/* { vol_perc, "|   %s%% ", NULL	      }, */
 	/* { run_command, "| 󰀼 %s |", "~/.archupdatecounter.sh" }, */
 	/* { uptime, " [^c#d3d3d3^ %s]", 	     NULL}, */
 	// { wifi_perc, "^c#e0def4^|^c#bddeab^ 󰖩 %s%% ", "wlan0" },
-	{ battery_perc, "^c#e0def4^|^c#938aa9^ 󰁹 %s%% ", "BAT0" },
-	{ datetime, "^c#e0def4^|^c#dcd7ba^ %s ",           "%a %b %d %R" },
+	{ battery_perc, "| 󰁹 %s%% ", "BAT0", 60, -1,	      },
+	{ datetime, "| %s ",           "%a %b %d %R", 5, -1, },
 };
 
