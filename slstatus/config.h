@@ -65,9 +65,10 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
-	{ vol_perc, " %s%% ", "Master", 5, 2	      }, 
-	{ cpu_perc, "|  %s%% ", NULL, 2, -1,	      },
-	{ ram_perc, "|  %s%% ", NULL, 5, -1,	      },
+	{ vol_perc, "  %s%% ", "Master", 5, 2	      }, 
+	{ cpu_perc, "|   %s%% ", NULL, 2, -1,	      },
+	{ ram_perc, "|   %s%% ", NULL, 5, -1,	      },
+	{ temp,    "|  %s°C ", "/sys/class/thermal/thermal_zone6/temp", 2, -1,	      },
 	/* { vol_perc, "|   %s%% ", NULL	      }, */
 	/* { run_command, "| 󰀼 %s |", "~/.archupdatecounter.sh" }, */
 	/* { uptime, " [^c#d3d3d3^ %s]", 	     NULL}, */
