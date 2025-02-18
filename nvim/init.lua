@@ -151,14 +151,13 @@ require("lazy").setup({
   config = function()
     require('dashboard').setup ({
       -- config
-    theme = 'hyper', -- or any other theme you prefer
+    theme = 'hyper', 
   config = {
     week_header = {
       enable = true,
     },
     shortcut = {
      { desc = '  New File', group = 'Label', action = 'enew', key = 'n' },
-      -- Add your fzf-lua shortcut here
       { desc = '  FZF Files', group = 'Label', action = 'lua require("fzf-lua").files()', key = 's' },
     },
   },
