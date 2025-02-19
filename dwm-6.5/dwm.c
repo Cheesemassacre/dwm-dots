@@ -2204,7 +2204,7 @@ updatebarpos(Monitor *m)
 }
 
 void
-updateclientlist()
+updateclientlist(void) // 2024-06-08 10:36	Add missing void to updateclientlist definition
 {
 	Client *c;
 	Monitor *m;
