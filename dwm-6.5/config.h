@@ -92,6 +92,23 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "10", NULL}; 
 static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd2[] = { "st", NULL };
+// static const char *browsercmd[] = { "firejail", "brave", "--enable-features=AcceleratedVideoDecodeLinuxGL",  NULL };
+static const char *browsercmd2[] = { "qutebrowser",  NULL };
+static const char *keepassxccmd[] = { "st", "-e", "cmus", NULL };
+static const char *emacscmd[] = { "vesktop", NULL };
+static const char *rangercmd[] = { "st", "-e", "ranger", NULL };
+static const char *nvimcmd[] = { "st", "-e", "nvim", NULL };
+
+Autostarttag autostarttaglist[] = {
+	{.cmd = termcmd2, .tags = 1 << 0 },
+	{.cmd = browsercmd2, .tags = 1 << 1 },
+	{.cmd = keepassxccmd, .tags = 1 << 3 },
+	{.cmd = emacscmd, .tags = 1 << 4 },
+	{.cmd = nvimcmd, .tags = 1 << 5 },
+	{.cmd = rangercmd, .tags = 1 << 2 },
+	{.cmd = NULL, .tags = 0 },
+};
 
 #include "movestack.c"
 static const Key keys[] = {
