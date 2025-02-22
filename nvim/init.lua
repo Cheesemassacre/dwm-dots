@@ -6,7 +6,7 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.smartindent = true
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.title = true
 vim.opt.titlestring = "%f - NVIM"
 vim.opt.clipboard = "unnamedplus"
@@ -14,7 +14,10 @@ vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"
 vim.opt.showmode = false
 vim.env.FZF_DEFAULT_COMMAND = "find . \\! \\( -type d -path ./.git -prune \\) \\! -type d \\! -name '*.tags' -printf '%P\\n'"
+vim.g.have_nerd_font = true
+vim.opt.scrolloff = 10
 
+-- Lazy.nvim install
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -28,9 +31,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Lazy packages
 require("lazy").setup({
 
   {
@@ -72,16 +77,6 @@ require("lazy").setup({
     end,
   },
 
-  -- {
-  --   "junegunn/fzf.vim",
-  --   dependencies = { "junegunn/fzf" },
-  --   config = function()
-  --     vim.keymap.set("n", "<leader>sf", ":Files<CR>", { noremap = true, silent = true })
-  --     vim.keymap.set("n", "<leader>ff", ":Rg<CR>", { noremap = true, silent = true })
-  --     vim.keymap.set("n", "<leader><leader>", ":Buffers<CR>", { noremap = true, silent = true })
-  --   end,
-  -- },
-
   {
     "norcalli/nvim-colorizer.lua",
     config = function()
@@ -91,16 +86,11 @@ require("lazy").setup({
     end,
   },
 
-  -- {
-  --   'nvim-lualine/lualine.nvim',
-  --   dependencies = { 'nvim-tree/nvim-web-devicons' }
-  -- },
-  
- {
+  {
   "gbprod/cutlass.nvim",
-  opts = {
+    opts = {
     }
- },
+  },
 
 --  {
 --     "Exafunction/codeium.nvim",
@@ -116,10 +106,9 @@ require("lazy").setup({
 
   {
     "nvim-treesitter/nvim-treesitter", 
-    build = ":TSUpdate",
-    config = function () 
+      build = ":TSUpdate",
+      config = function () 
       local configs = require("nvim-treesitter.configs")
-
       configs.setup({
           ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html" },
           sync_install = false,
@@ -132,43 +121,62 @@ require("lazy").setup({
   {
   "ibhagwan/fzf-lua",
   -- optional for icon support
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   -- or if using mini.icons/mini.nvim
   -- dependencies = { "echasnovski/mini.icons" },
-  opts = {}
+    opts = {}
   },
 
   {
     'numToStr/Comment.nvim',
-    opts = {
+      opts = {
         -- add any options here
     }
   },
 
   {
   'nvimdev/dashboard-nvim',
-  event = 'VimEnter',
-  config = function()
+    event = 'VimEnter',
+    config = function()
     require('dashboard').setup ({
       -- config
-    theme = 'hyper', 
-  config = {
-    week_header = {
-      enable = true,
-    },
-    shortcut = {
-     { desc = '  New File', group = 'Label', action = 'enew', key = 'n' },
-      { desc = '  FZF Files', group = 'Label', action = 'lua require("fzf-lua").files()', key = 's' },
-    },
-  },
+      theme = 'hyper', 
+      config = {
+        week_header = {
+        enable = false,
+        },
+          header = {
+            '', 
+            ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+            ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+            ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+            ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+            ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+            ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+            '',
+            '',
+          },
+        shortcut = {
+          { desc = '  New File', group = 'Label', action = 'enew', key = 'n' },
+          { desc = '  FZF Files', group = 'Label', action = 'lua require("fzf-lua").files()', key = 'f' },
+        },
+      },
     })
   end,
   dependencies = { {'nvim-tree/nvim-web-devicons'}}
   },
 
+  {
+  'ggandor/leap.nvim'
+  },
+  
+  {
+  'tpope/vim-repeat'
+  },
 
 })
 
+-- FZF keybinds
 vim.keymap.set("n", "<leader>sf", function()
   require("fzf-lua").files()
 end, { noremap = true, silent = true })
@@ -181,4 +189,11 @@ require("fzf-lua").setup{
     file_icon_padding = '',
 }
 
+-- Dashboard colors
+vim.api.nvim_set_hl(0, 'DashboardHeader', { fg = '#957fb8' })
+vim.api.nvim_set_hl(0, 'Label', { fg = '#7e9cd8' })
 
+-- Leap.nvim keymap
+vim.keymap.set({'n', 'x', 'o'}, 'f',  '<Plug>(leap-forward)')
+vim.keymap.set({'n', 'x', 'o'}, 'F',  '<Plug>(leap-backward)')
+vim.keymap.set({'n', 'x', 'o'}, 'gs', '<Plug>(leap-from-window)')
