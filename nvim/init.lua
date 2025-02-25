@@ -16,6 +16,7 @@ vim.opt.showmode = false
 vim.env.FZF_DEFAULT_COMMAND = "find . \\! \\( -type d -path ./.git -prune \\) \\! -type d \\! -name '*.tags' -printf '%P\\n'"
 vim.g.have_nerd_font = true
 vim.opt.scrolloff = 10
+vim.opt.ruler = false
 
 -- Lazy.nvim install
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -67,16 +68,16 @@ require("lazy").setup({
     end,
   },
 
-  {
-    "vim-airline/vim-airline",
-    dependencies = { "vim-airline/vim-airline-themes" },
-    config = function()
-      vim.g.airline_theme = "transparent"
-      vim.g.airline_powerline_fonts = 0
-      vim.g["airline#extensions#whitespace#enabled"] = 0
-    end,
-  },
-
+  -- {
+  --   "vim-airline/vim-airline",
+  --   dependencies = { "vim-airline/vim-airline-themes" },
+  --   config = function()
+  --     vim.g.airline_theme = "transparent"
+  --     vim.g.airline_powerline_fonts = 0
+  --     vim.g["airline#extensions#whitespace#enabled"] = 0
+  --   end,
+  -- },
+  
   {
     "norcalli/nvim-colorizer.lua",
     config = function()
@@ -174,6 +175,42 @@ require("lazy").setup({
   'tpope/vim-repeat'
   },
 
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
+  },
+
+  {
+  "neovim/nvim-lspconfig", -- REQUIRED: for native Neovim LSP integration
+  lazy = false, -- REQUIRED: tell lazy.nvim to start this plugin at startup
+  dependencies = {
+    -- main one
+    { "ms-jpq/coq_nvim", branch = "coq" },
+
+    -- 9000+ Snippets
+    { "ms-jpq/coq.artifacts", branch = "artifacts" },
+
+    -- lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
+    -- Need to **configure separately**
+    { 'ms-jpq/coq.thirdparty', branch = "3p" }
+    -- - shell repl
+    -- - nvim lua api
+    -- - scientific calculator
+    -- - comment banner
+    -- - etc
+  },
+  init = function()
+    vim.g.coq_settings = {
+        auto_start = true, -- if you want to start COQ at startup
+        auto_start ='shut-up',
+        -- Your COQ settings here
+    }
+  end,
+  config = function()
+    -- Your LSP settings here
+  end,
+ },
+
 })
 
 -- FZF keybinds
@@ -197,3 +234,50 @@ vim.api.nvim_set_hl(0, 'Label', { fg = '#7e9cd8' })
 vim.keymap.set({'n', 'x', 'o'}, 'f',  '<Plug>(leap-forward)')
 vim.keymap.set({'n', 'x', 'o'}, 'F',  '<Plug>(leap-backward)')
 vim.keymap.set({'n', 'x', 'o'}, 'gs', '<Plug>(leap-from-window)')
+
+require('lualine').setup {
+  options = {
+    theme = {
+      normal = {
+        a = { bg = 'NONE', fg = '#dcd7ba' }, 
+        b = { bg = 'NONE' },
+        c = { bg = 'NONE' },
+      },
+      insert = {
+        a = { bg = 'NONE', bg = '#98bb6c', fg = '#000000' },
+        b = { bg = 'NONE' },
+        c = { bg = 'NONE' },
+      },
+      visual = {
+        a = { bg = 'NONE', bg = '#938aa9', fg = '#000000' },
+        b = { bg = 'NONE' },
+        c = { bg = 'NONE' },
+      },
+      replace = {
+        a = { bg = 'NONE' },
+        b = { bg = 'NONE' },
+        c = { bg = 'NONE' },
+      },
+      command = {
+        a = { bg = 'NONE', bg = '#7fb4ca', fg = '#000000' },
+        b = { bg = 'NONE' },
+        c = { bg = 'NONE' },
+      },
+      inactive = {
+        a = { bg = 'NONE' },
+        b = { bg = 'NONE' },
+        c = { bg = 'NONE' },
+      },
+    },
+    component_separators = { left = '', right = '' }, -- Optional: Remove separators
+    section_separators = { left = '', right = '' },    -- Optional: Remove section dividers
+  },
+  sections = {
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch', 'diff', 'diagnostics' },
+    lualine_c = { 'filename' },
+    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' },
+  },
+}

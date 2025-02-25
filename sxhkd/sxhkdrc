@@ -1,162 +1,151 @@
-#
-# wm independent hotkeys
-#
-
-# terminal emulator
-super + Return
-        alacritty 
-
-# program launcher
-super + d
-	rofi -show drun
-
-# make sxhkd reload its configuration files:
-super + Escape
-	pkill -USR1 -x sxhkd
-
-#
-# bspwm hotkeys
-#
-
-# quit/restart bspwm
-super + alt + {q,r}
-	bspc {quit,wm -r}
-
-# close and kill
-super + {_,shift + }q
-	bspc node -{c,k}
-
-# alternate between the tiled and monocle layout
-super + m
-	bspc desktop -l next
-
-# send the newest marked node to the newest preselected node
-super + y
-	bspc node newest.marked.local -n newest.!automatic.local
-
-# swap the current node and the biggest window
-super + g
-	bspc node -s biggest.local
-
-#
-# state/flags
-#
-
-# set the window state
-super + {t,shift + t,s,f}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
-
-# set the node flags
-super + ctrl + {m,x,s,z}
-	bspc node -g {marked,locked,sticky,private}
-
-#
-# focus/swap
-#
-
-# focus the node in the given direction
-super + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}
-
-# focus the node for the given path jump
-super + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
-
-# focus the next/previous window in the current desktop
-super + {_,shift + }c
-	bspc node -f {next,prev}.local.!hidden.window
-
-# focus the next/previous desktop in the current monitor
-super + bracket{left,right}
-	bspc desktop -f {prev,next}.local
-
-# focus the last node/desktop
-super + {grave,Tab}
-	bspc {node,desktop} -f last
-
-# focus the older or newer node in the focus history
-super + {o,i}
-	bspc wm -h off; \
-	bspc node {older,newer} -f; \
-	bspc wm -h on
-
-# focus or send to the given desktop
-super + {_,shift + }{1-9,0,F1,F2}
-	bspc {desktop -f,node -d} '^{1-9,10,11,12}'
-
-#
-# preselect
-#
-
-# preselect the direction
-super + ctrl + {h,j,k,l}
-	bspc node -p {west,south,north,east}
-
-# preselect the ratio
-super + ctrl + {1-9}
-	bspc node -o 0.{1-9}
-
-# cancel the preselection for the focused node
-super + ctrl + space
-	bspc node -p cancel
-
-# cancel the preselection for the focused desktop
-super + ctrl + shift + space
-	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-
-super + shift + w
-	bspc node -n 'last.!automatic.local'
-#
-# move/resize
-#
-
-# expand a window by moving one of its side outward
-super + alt + {h,j,k,l}
-	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
-
-# contract a window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
-	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
-
-# move a floating window
-super + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
-
-super + w
-        rofi -show window
-
-super + e ; p ; r
-	./.picomreload.sh
+super + shift + Return
+        kitty
 
 super + shift + s
-	xfce4-screenshooter
+	maim ~/Pictures/$(date +%s).png
+
+super + e ; s ; i
+        xfce4-screenshooter
 
 super + e ; t
-	nemo
+	      st -e ranger
 	
 super + e ; s ; p
-	flatpak run com.spotify.Client
+	      spotify
 
 super + e ; d ; i
-	flatpak run dev.vencord.Vesktop
+        vesktop --enable-gpu-rasterization
 
 super + e ; w ; w ; w
-	firefox
+        firejail brave --enable-features=AcceleratedVideoDecodeLinuxGL 
 
 super + shift + p
         rofi -modi "clipboard:greenclip print" -show clipboard
 
-super + e ; m
-	./.monitoroc.sh
+super + v
+	      st -e nvim
 
-super + shift + e
-    ./.poweopt.sh
+super + e ;  b
+	      pavucontrol
+
+super + Escape
+        killall sxhkd; sxhkd 
 
 super + w
         rofi -show window
 
-super + v
-	gvim
+super + e ; m
+        st -e cmus
 
 super + n
-	mate-terminal -e "nvim .notes"
+	      st -e nvim .notes
+
+super + e ; p ; 0
+	      killall picom
+
+super + e ; p ; 1
+        picom -b
+
+super + e ; d ; e
+        deluge-gtk
+
+super + e ; g
+        gimp
+
+super + e ; c
+        qalculate-gtk
+
+XF86AudioRaiseVolume
+	      pactl set-sink-volume @DEFAULT_SINK@ +2%; pkill -RTMIN+2 slstatus
+
+XF86AudioLowerVolume
+	      pactl set-sink-volume @DEFAULT_SINK@ -2%; pkill -RTMIN+2 slstatus
+
+XF86AudioMute
+	      pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+XF86MonBrightnessDown
+	      brightnessctl s 5%-
+
+XF86MonBrightnessUp
+	      brightnessctl s +5%
+
+XF86AudioPlay 
+       playerctl play-pause; pkill -RTMIN+2 slstatus  
+
+XF86AudioPause 
+       playerctl play-pause; pkill -RTMIN+2 slstatus 
+
+XF86AudioNext 
+       playerctl next; pkill -RTMIN+2 slstatus 
+
+XF86AudioPrev 
+       playerctl previous; pkill -RTMIN+2 slstatus
+
+super + x 
+       ./.tabwin.sh add
+
+super + shift + x
+       ./.tabwin.sh remove
+
+super + alt + h
+       xdotool mousemove_relative -- -10 0
+
+super + alt + j
+       xdotool mousemove_relative -- 0 10
+
+super + alt + k
+       xdotool mousemove_relative -- 0 -10 
+
+super + alt + l
+       xdotool mousemove_relative -- 10 0
+
+super + alt + p
+       xdotool mousemove 0 0
+
+super + b ; b
+       xdotool click 1
+
+super + b ; n
+       xdotool click 3
+
+super +  alt + o
+       xdotool click 4
+
+super + alt + i
+       xdotool click 5
+
+super + alt + y
+	      xset r rate 650 20; pkill -RTMIN+2 slstatus 
+
+super + alt + x
+	      xset r rate 350 100; pkill -RTMIN+2 slstatus 
+
+super + e ; q ; s
+        ./.dmenuwsqute.sh
+
+super + e ; q ; e
+        ./.dmenuemoji.sh
+
+super + e ; j
+        ./.backlight.sh
+
+super + d
+	      rofi -show drun -icon-theme "Papirus" -show-icons
+
+# Move floating window (arrow keys)
+super + Left
+    xdotool getactivewindow windowmove --relative -- -20 0;  # Left
+
+super + Right
+    xdotool getactivewindow windowmove --relative 20 0;      # Right
+
+super + Up
+     xdotool getactivewindow windowmove --relative -- 0 -20;  # Up
+
+super + Down
+     xdotool getactivewindow windowmove --relative 0 20;      # Down
+
+# Resize floating window (arrow keys)
+super + alt + {Left,Right,Up,Down}
+    resize_window {left,right,up,down} 20
