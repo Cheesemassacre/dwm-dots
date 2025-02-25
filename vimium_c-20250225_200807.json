@@ -1,0 +1,37 @@
+{
+	"name": "Vimium C",
+	"@time": "2/25/2025, 8:08:07 PM",
+	"time": 1740510487629,
+	"environment": {
+		"extension": "2.11.3",
+		"platform": "linux",
+		"chromium": 133
+	},
+	"allBrowserUrls": true,
+	"exclusionRules": [
+		{
+			"passKeys": "",
+			"pattern": ":https://mail.google.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://play.geforcenow.com/"
+		}
+	],
+	"grabBackFocus": true,
+	"keyLayout": 2,
+	"keyMappings": [
+		"#!no-check",
+		"map k scrollPxUp count=120",
+		"map j scrollPxDown count=360",
+		"map t Vomnibar.activateTabs",
+		"map < moveTabLeft",
+		"map > moveTabRight",
+		"map d scrollPxDown count=700",
+		""
+	],
+	"keyupTime": 50,
+	"scrollStepSize": 300,
+	"smoothScroll": false,
+	"vimSync": true
+}
