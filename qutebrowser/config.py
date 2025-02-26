@@ -246,10 +246,14 @@ config.bind('<Ctrl-Shift-p>', 'hint links spawn umpv {hint-url}')
 # Search engines
 c.url.searchengines = {
     'DEFAULT': 'https://www.startpage.com/sp/search?q={}',
+    '!g': 'https://google.com/search?q={}',
+    '!d': 'https://duckduckgo.com/?q={}',
 }
 
 c.url.default_page = 'https://www.startpage.com'
 c.url.start_pages = 'https://www.startpage.com'
+
+c.completion.open_categories = ["bookmarks", "history"]
 
 # GPU settings
 c.qt.args = [ "disable-logging", 
