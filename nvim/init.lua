@@ -1,3 +1,5 @@
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -17,6 +19,7 @@ vim.env.FZF_DEFAULT_COMMAND = "find . \\! \\( -type d -path ./.git -prune \\) \\
 vim.g.have_nerd_font = true
 vim.opt.scrolloff = 10
 vim.opt.ruler = false
+vim.loader.enable()
 
 -- Lazy.nvim install
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -121,6 +124,7 @@ require("lazy").setup({
 
   {
   "ibhagwan/fzf-lua",
+    lazy = true,
   -- optional for icon support
     dependencies = { "nvim-tree/nvim-web-devicons" },
   -- or if using mini.icons/mini.nvim
@@ -130,6 +134,7 @@ require("lazy").setup({
 
   {
     'numToStr/Comment.nvim',
+    lazy = true,
       opts = {
         -- add any options here
     }
@@ -168,11 +173,12 @@ require("lazy").setup({
   },
 
   {
-  'ggandor/leap.nvim'
+  'ggandor/leap.nvim',
   },
   
   {
-  'tpope/vim-repeat'
+  'tpope/vim-repeat',
+    lazy = true,
   },
 
   {
@@ -209,6 +215,11 @@ require("lazy").setup({
   config = function()
     -- Your LSP settings here
   end,
+ },
+  
+ {
+  "nvim-tree/nvim-tree.lua",
+    lazy = true,
  },
 
 })
@@ -269,8 +280,8 @@ require('lualine').setup {
         c = { bg = 'NONE' },
       },
     },
-    component_separators = { left = '', right = '' }, -- Optional: Remove separators
-    section_separators = { left = '', right = '' },    -- Optional: Remove section dividers
+    component_separators = { left = '', right = '' }, 
+    section_separators = { left = '', right = '' },  
   },
   sections = {
     lualine_a = { 'mode' },
@@ -281,3 +292,23 @@ require('lualine').setup {
     lualine_z = { 'location' },
   },
 }
+
+-- NvimTree 
+require("nvim-tree").setup({
+  sort = {
+    sorter = "case_sensitive",
+  },
+  view = {
+    width = 30,
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = false,
+  },
+})
+
+-- NvimTree keybind
+vim.api.nvim_set_keymap('n', '<leader>tt', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>tf', ':NvimTreeFindFile<CR>', { noremap = true, silent = true })
