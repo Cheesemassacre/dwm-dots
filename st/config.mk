@@ -5,6 +5,7 @@ VERSION = 0.9.2
 
 # paths
 PREFIX = /usr/local
+APPPREFIX = $(PREFIX)/share/applications
 MANPREFIX = $(PREFIX)/share/man
 
 X11INC = /usr/X11R6/include
@@ -24,7 +25,7 @@ LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft \
 STCPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600
 STCFLAGS = $(INCS) $(STCPPFLAGS) $(CPPFLAGS) $(CFLAGS)
 STLDFLAGS = $(LIBS) $(LDFLAGS)
-CFLAGS = -Ofast -march=native
+CFLAGS = -O2 -march=native
 
 # OpenBSD:
 #CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600 -D_BSD_SOURCE
@@ -34,4 +35,4 @@ CFLAGS = -Ofast -march=native
 #MANPREFIX = ${PREFIX}/man
 
 # compiler and linker
-# CC = c99
+CC = clang
