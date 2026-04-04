@@ -2,10 +2,10 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.mouse = "a"
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt.relativenumber = true 
+vim.opt.mouse = "a" 
+vim.opt.tabstop = 2 
+vim.opt.shiftwidth = 2 
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.wrap = true
@@ -19,7 +19,18 @@ vim.env.FZF_DEFAULT_COMMAND = "find . \\! \\( -type d -path ./.git -prune \\) \\
 vim.g.have_nerd_font = true
 vim.opt.scrolloff = 10
 vim.opt.ruler = false
+vim.cmd("colorscheme retrobox")
 vim.loader.enable()
+
+-- Neovide support
+if vim.g.neovide then
+  vim.o.guifont = "MesloLGM Nerd Font Mono:h8"
+  vim.g.neovide_opacity = 0.9
+  vim.g.neovide_padding_top = 15
+  vim.g.neovide_padding_bottom = 5
+  vim.g.neovide_padding_right = 5
+  vim.g.neovide_padding_left = 5
+end
 
 -- Lazy.nvim install
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -48,16 +59,16 @@ require("lazy").setup({
       config = true,
   },
 
-  {
-    "rebelot/kanagawa.nvim",
-    config = function()
-      vim.cmd("colorscheme kanagawa")
-      --   require('kanagawa').setup({
-      --     theme = "lotus",
-      --     commentStyle = { italic = false },
-      -- })
-    end,
-  },
+  -- {
+  --   "rebelot/kanagawa.nvim",
+  --   config = function()
+  --     vim.cmd("colorscheme retrobox")
+  --     --   require('kanagawa').setup({
+  --     --     theme = "lotus",
+  --     --     commentStyle = { italic = false },
+  --     -- })
+  --   end,
+  -- },
 
   {
     "xiyaowong/transparent.nvim",
@@ -71,42 +82,19 @@ require("lazy").setup({
     end,
   },
 
-  -- {
-  --   "vim-airline/vim-airline",
-  --   dependencies = { "vim-airline/vim-airline-themes" },
-  --   config = function()
-  --     vim.g.airline_theme = "transparent"
-  --     vim.g.airline_powerline_fonts = 0
-  --     vim.g["airline#extensions#whitespace#enabled"] = 0
-  --   end,
-  -- },
-  
   {
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup({
-        "*",
-      })
-    end,
+    "catgoose/nvim-colorizer.lua",
+    event = "BufReadPre",
+    opts = {},
   },
+
+
 
   {
   "gbprod/cutlass.nvim",
     opts = {
     }
   },
-
---  {
---     "Exafunction/codeium.nvim",
---     dependencies = {
---         "nvim-lua/plenary.nvim",
---         "hrsh7th/nvim-cmp",
---     },
---     config = function()
---         require("codeium").setup({
---         })
---     end,
--- },
 
   {
     "nvim-treesitter/nvim-treesitter", 
@@ -164,7 +152,7 @@ require("lazy").setup({
           },
         shortcut = {
           { desc = '  New File', group = 'Label', action = 'enew', key = 'n' },
-          { desc = '  FZF Files', group = 'Label', action = 'lua require("fzf-lua").files()', key = 'f' },
+          { desc = '  Find File', group = 'Label', action = 'lua require("fzf-lua").files()', key = 'f' },
         },
       },
     })
@@ -173,7 +161,7 @@ require("lazy").setup({
   },
 
   {
-  'ggandor/leap.nvim',
+  url = "https://codeberg.org/andyg/leap.nvim",
   },
   
   {
@@ -187,9 +175,9 @@ require("lazy").setup({
   },
 
   {
-  "neovim/nvim-lspconfig", -- REQUIRED: for native Neovim LSP integration
-  lazy = false, -- REQUIRED: tell lazy.nvim to start this plugin at startup
-  dependencies = {
+    "neovim/nvim-lspconfig", -- REQUIRED: for native Neovim LSP integration
+    lazy = false, -- REQUIRED: tell lazy.nvim to start this plugin at startup
+    dependencies = {
     -- main one
     { "ms-jpq/coq_nvim", branch = "coq" },
 
@@ -199,12 +187,8 @@ require("lazy").setup({
     -- lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
     -- Need to **configure separately**
     { 'ms-jpq/coq.thirdparty', branch = "3p" }
-    -- - shell repl
-    -- - nvim lua api
-    -- - scientific calculator
-    -- - comment banner
-    -- - etc
   },
+
   init = function()
     vim.g.coq_settings = {
         auto_start = true, -- if you want to start COQ at startup
@@ -215,12 +199,12 @@ require("lazy").setup({
   config = function()
     -- Your LSP settings here
   end,
- },
+  },
   
- {
-  "nvim-tree/nvim-tree.lua",
-    lazy = true,
- },
+  {
+   "nvim-tree/nvim-tree.lua",
+     lazy = true,
+  }
 
 })
 
@@ -238,46 +222,54 @@ require("fzf-lua").setup{
 }
 
 -- Dashboard colors
-vim.api.nvim_set_hl(0, 'DashboardHeader', { fg = '#957fb8' })
-vim.api.nvim_set_hl(0, 'Label', { fg = '#7e9cd8' })
+vim.api.nvim_set_hl(0, 'DashboardHeader', { fg = '#83a598' })
+vim.api.nvim_set_hl(0, 'Label', { fg = '#458588' })
 
--- Leap.nvim keymap
+-- Leap setup
 vim.keymap.set({'n', 'x', 'o'}, 'f',  '<Plug>(leap-forward)')
 vim.keymap.set({'n', 'x', 'o'}, 'F',  '<Plug>(leap-backward)')
 vim.keymap.set({'n', 'x', 'o'}, 'gs', '<Plug>(leap-from-window)')
 
+require('leap').opts.preview = function (ch0, ch1, ch2)
+  return not (
+    ch1:match('%s')
+    or (ch0:match('%a') and ch1:match('%a') and ch2:match('%a'))
+  )
+end
+
+-- Lulaline colors
 require('lualine').setup {
   options = {
     theme = {
       normal = {
-        a = { bg = 'NONE', fg = '#dcd7ba' }, 
-        b = { bg = 'NONE' },
-        c = { bg = 'NONE' },
+        a = { bg = '', fg = '#ebdbb2' }, 
+        b = { bg = '' },
+        c = { bg = '' },
       },
       insert = {
-        a = { bg = 'NONE', bg = '#98bb6c', fg = '#000000' },
-        b = { bg = 'NONE' },
-        c = { bg = 'NONE' },
+        a = { bg = '', bg = '#98971a', fg = '#000000' },
+        b = { bg = '' },
+        c = { bg = '' },
       },
       visual = {
-        a = { bg = 'NONE', bg = '#938aa9', fg = '#000000' },
-        b = { bg = 'NONE' },
-        c = { bg = 'NONE' },
+        a = { bg = '', bg = '#b16286', fg = '#000000' },
+        b = { bg = '' },
+        c = { bg = '' },
       },
       replace = {
-        a = { bg = 'NONE' },
-        b = { bg = 'NONE' },
-        c = { bg = 'NONE' },
+        a = { bg = '' },
+        b = { bg = '' },
+        c = { bg = '' },
       },
       command = {
-        a = { bg = 'NONE', bg = '#7fb4ca', fg = '#000000' },
-        b = { bg = 'NONE' },
-        c = { bg = 'NONE' },
+        a = { bg = '', bg = '#458588', fg = '#000000' },
+        b = { bg = '' },
+        c = { bg = '' },
       },
       inactive = {
-        a = { bg = 'NONE' },
-        b = { bg = 'NONE' },
-        c = { bg = 'NONE' },
+        a = { bg = '' },
+        b = { bg = '' },
+        c = { bg = '' },
       },
     },
     component_separators = { left = '', right = '' }, 
@@ -309,6 +301,12 @@ require("nvim-tree").setup({
   },
 })
 
--- NvimTree keybind
 vim.api.nvim_set_keymap('n', '<leader>tt', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>tf', ':NvimTreeFindFile<CR>', { noremap = true, silent = true })
+
+-- Fzf setup
+require'fzf-lua'.setup {
+  files = {
+    cmd = "rg --files --hidden --glob '!node_modules/*' --glob '!.git/*' --glob '!dist/*' --glob '!.dotfiles/void-packages/*'"
+  }
+}
