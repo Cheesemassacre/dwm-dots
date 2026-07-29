@@ -1,8 +1,10 @@
+# vim: ft=sh
+
 super + shift + Return
-        kitty
+        alacritty
 
 super + shift + s
-	maim ~/Pictures/$(date +%s).png
+        maim -s ~/Pictures/$(date +%s).png
 
 super + e ; s ; i
         xfce4-screenshooter
@@ -11,13 +13,13 @@ super + e ; t
 	      st -e ranger
 	
 super + e ; s ; p
-	      spotify
+	      flatpak run com.spotify.Client --disable-gpu
 
 super + e ; d ; i
         vesktop --enable-gpu-rasterization
 
 super + e ; w ; w ; w
-        firejail brave --enable-features=AcceleratedVideoDecodeLinuxGL 
+        flatpak run com.brave.Browser --enable-features=AcceleratedVideoDecodeLinuxGL 
 
 super + shift + p
         rofi -modi "clipboard:greenclip print" -show clipboard
@@ -29,7 +31,7 @@ super + e ;  b
 	      pavucontrol
 
 super + Escape
-        killall sxhkd; sxhkd 
+        pkill sxhkd; sxhkd 
 
 super + w
         rofi -show window
@@ -38,7 +40,7 @@ super + e ; m
         st -e cmus
 
 super + n
-	      st -e nvim .notes
+	      st -e nvim ~/.notes
 
 super + e ; p ; 0
 	      killall picom
@@ -56,10 +58,10 @@ super + e ; c
         qalculate-gtk
 
 XF86AudioRaiseVolume
-	      pactl set-sink-volume @DEFAULT_SINK@ +2%; pkill -RTMIN+2 slstatus
+	      amixer sset 'Master' 2%+; pkill -RTMIN+2 slstatus
 
 XF86AudioLowerVolume
-	      pactl set-sink-volume @DEFAULT_SINK@ -2%; pkill -RTMIN+2 slstatus
+	      amixer sset 'Master' 2%-; pkill -RTMIN+2 slstatus
 
 XF86AudioMute
 	      pactl set-sink-mute @DEFAULT_SINK@ toggle
@@ -81,12 +83,6 @@ XF86AudioNext
 
 XF86AudioPrev 
        playerctl previous; pkill -RTMIN+2 slstatus
-
-super + x 
-       ./.tabwin.sh add
-
-super + shift + x
-       ./.tabwin.sh remove
 
 super + alt + h
        xdotool mousemove_relative -- -10 0
@@ -127,25 +123,29 @@ super + e ; q ; s
 super + e ; q ; e
         ./.dmenuemoji.sh
 
-super + e ; j
-        ./.backlight.sh
-
-super + d
-	      rofi -show drun -icon-theme "Papirus" -show-icons
+super + e ; r ; e
+        reminder
 
 # Move floating window (arrow keys)
 super + Left
-    xdotool getactivewindow windowmove --relative -- -20 0;  # Left
+       xdotool getactivewindow windowmove --relative -- -20 0;  # Left
 
 super + Right
-    xdotool getactivewindow windowmove --relative 20 0;      # Right
+       xdotool getactivewindow windowmove --relative 20 0;      # Right
 
 super + Up
-     xdotool getactivewindow windowmove --relative -- 0 -20;  # Up
+       xdotool getactivewindow windowmove --relative -- 0 -20;  # Up
 
 super + Down
-     xdotool getactivewindow windowmove --relative 0 20;      # Down
+       xdotool getactivewindow windowmove --relative 0 20;      # Down
 
-# Resize floating window (arrow keys)
-super + alt + {Left,Right,Up,Down}
-    resize_window {left,right,up,down} 20
+# Night Light
+super + e ; n ; 1
+       redshift -P -O 4500
+
+super + e ; n ; 0
+       redshift -P -O 6500
+
+super + e ; l ; d
+       xautolock -locknow -locker slock &
+
